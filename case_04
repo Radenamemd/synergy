@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+def max_dragon_power(n: int) -> int:
+    # dp[s] = max product for sum s, using parts 1..7
+    dp = [0] * (n + 1)
+    dp[0] = 1
+
+    for s in range(1, n + 1):
+        best = 0
+        for k in range(1, 8):  # 1..7
+            if k <= s:
+                best = max(best, dp[s - k] * k)
+        dp[s] = best
+
+    return dp[n]
+
+
+def main():
+    n = int(input().strip())
+    print(max_dragon_power(n))
+
+
+if __name__ == "__main__":
+    main()
